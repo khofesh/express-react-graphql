@@ -1,15 +1,32 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import fetchSongs from "../queries/fetchSongs";
+
+const DELETE_SONG = gql`
+  mutation DeleteSong($id: ID!) {
+    deleteSong(id: $id) {
+      id
+    }
+  }
+`;
 
 function SongList(props) {
   const { loading, error, data, refetch } = useQuery(fetchSongs);
+  const [deleteSong, {}] = useMutation(DELETE_SONG);
   console.log(data);
 
   console.error(error);
 
-  function onSongDelete(id) {}
+  async function onSongDelete(id) {
+    await deleteSong({
+      variables: {
+        id,
+      },
+    });
+
+    await refetch();
+  }
 
   function renderSongs() {
     return data.songs.map(({ id, title }) => {
