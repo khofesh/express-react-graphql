@@ -7,6 +7,7 @@ changes I made:
 1. `.mjs`
 2. some API changes in graphql
 3. mongodb in local container
+4. functional components
 
 ## mongodb
 

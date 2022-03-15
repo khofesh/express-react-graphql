@@ -1,11 +1,17 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import fetchSongs from "../queries/fetchSongs";
 
 function SongList(props) {
+  const { loading, error, data } = useQuery(fetchSongs);
+  console.log(data);
+
+  console.error(error);
+
   function onSongDelete(id) {}
 
   function renderSongs() {
-    return props.data.songs.map(({ id, title }) => {
+    return data.songs.map(({ id, title }) => {
       return (
         <li key={id} className="collection-item">
           <Link to={`/songs/${id}`}>{title}</Link>
@@ -17,13 +23,17 @@ function SongList(props) {
     });
   }
 
-  if (props.data.loading) {
+  if (error) {
+    return <div>Error occurred</div>;
+  }
+
+  if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {/* <ul className="collection">{renderSongs()}</ul> */}
+      <ul className="collection">{renderSongs()}</ul>
       <Link to="/songs/new" className="btn-floating btn-large red right">
         <i className="material-icons">add</i>
       </Link>
