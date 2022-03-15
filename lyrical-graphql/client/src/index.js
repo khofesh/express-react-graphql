@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ApolloClient from "apollo-client";
 import { ApolloProvider } from "react-apollo";
+import { BrowserRouter } from "react-router-dom";
 import "./style/style.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -13,7 +14,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

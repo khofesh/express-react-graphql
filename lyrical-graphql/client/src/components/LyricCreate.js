@@ -1,36 +1,32 @@
-import React, { Component } from 'react';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import React, { useState } from "react";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
-class LyricCreate extends Component {
-  constructor(props) {
-    super(props);
+function LyricCreate(props) {
+  const [content, contentSet] = useState("");
 
-    this.state = { content: '' };
-  }
-
-  onSubmit(event) {
+  const onSubmit = (event) => {
     event.preventDefault();
 
-    this.props.mutate({
-      variables: {
-        content: this.state.content,
-        songId: this.props.songId
-      }
-    }).then(() => this.setState({ content: '' }));
-  }
+    props
+      .mutate({
+        variables: {
+          content: content,
+          songId: props.songId,
+        },
+      })
+      .then(() => contentSet(""));
+  };
 
-  render() {
-    return (
-      <form onSubmit={this.onSubmit.bind(this)}>
-        <label>Add a Lyric</label>
-        <input
-          value={this.state.content}
-          onChange={event => this.setState({ content: event.target.value })}
-        />
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={onSubmit}>
+      <label>Add a Lyric</label>
+      <input
+        value={content}
+        onChange={(event) => contentSet(event.target.value)}
+      />
+    </form>
+  );
 }
 
 const mutation = gql`
