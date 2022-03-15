@@ -106,6 +106,29 @@ const mutation = new GraphQLObjectType({
         return res.data;
       },
     },
+    editUser: {
+      type: UserType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString),
+        },
+        firstName: { type: GraphQLString },
+        age: { type: GraphQLInt },
+        companyId: { type: GraphQLString },
+      },
+      async resolve(parentValue, args) {
+        const res = await axios.patch(
+          `http://localhost:3000/users/${args.id}`,
+          {
+            firstName: args.firstName,
+            age: args.age,
+            companyId: args.companyId,
+          }
+        );
+
+        return res.data;
+      },
+    },
   },
 });
 
