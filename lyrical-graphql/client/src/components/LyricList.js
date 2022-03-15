@@ -1,5 +1,35 @@
+import { gql, useMutation } from "@apollo/client";
+
+const LIKE_LYRIC = gql`
+  mutation LikeLyric($id: ID!) {
+    likeLyric(id: $id) {
+      id
+      likes
+    }
+  }
+`;
+
 function LyricList(props) {
-  const onLike = (id, likes) => {};
+  const [likeLyric, { data, loading, error }] = useMutation(LIKE_LYRIC);
+
+  const onLike = async (id, likes) => {
+    await likeLyric({
+      variables: { id },
+      optimisticResponse: {
+        __typename: "Mutation",
+        likeLyric: {
+          id,
+          __typename: "LyricType",
+          likes: likes + 1,
+        },
+      },
+    });
+  };
+
+  console.log("data", data);
+
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
 
   const renderLyrics = () => {
     return props.lyrics.map(({ id, content, likes }) => {
