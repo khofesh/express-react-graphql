@@ -8,7 +8,7 @@ function App() {
   return (
     <Wrapper>
       <Routes>
-        <Route path="/" element={<SongList data={[]} />} />
+        <Route path="/" element={<SongList />} />
         <Route path="songs/new" element={<SongCreate />} />
         <Route path="songs/:id" element={<SongDetail />} />
       </Routes>
