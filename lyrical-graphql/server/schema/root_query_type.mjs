@@ -5,8 +5,8 @@ import {
   GraphQLID,
   GraphQLNonNull,
 } from "graphql";
-import SongType from "./song_type";
-import LyricType from "./lyric_type";
+import SongType from "./song_type.mjs";
+import LyricType from "./lyric_type.mjs";
 
 const Lyric = mongoose.model("lyric");
 const Song = mongoose.model("song");

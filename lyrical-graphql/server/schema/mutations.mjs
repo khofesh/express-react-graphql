@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 const Song = mongoose.model("song");
 const Lyric = mongoose.model("lyric");
 
-import SongType from "./song_type";
-import LyricType from "./lyric_type";
+import SongType from "./song_type.mjs";
+import LyricType from "./lyric_type.mjs";
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
