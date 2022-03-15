@@ -1,18 +1,6 @@
 import { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
-
-const ADD_LYRIC = gql`
-  mutation AddLyricToSong($content: String!, $songId: ID!) {
-    addLyricToSong(content: $content, songId: $songId) {
-      id
-      lyrics {
-        id
-        content
-        likes
-      }
-    }
-  }
-`;
+import { useMutation } from "@apollo/client";
+import { ADD_LYRIC } from "../queries/addLyric";
 
 function LyricCreate(props) {
   const [addLyricToSong, { data, loading, error }] = useMutation(ADD_LYRIC);

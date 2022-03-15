@@ -1,13 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
-
-const LIKE_LYRIC = gql`
-  mutation LikeLyric($id: ID!) {
-    likeLyric(id: $id) {
-      id
-      likes
-    }
-  }
-`;
+import { useMutation } from "@apollo/client";
+import { LIKE_LYRIC } from "../queries/likeLyric";
 
 function LyricList(props) {
   const [likeLyric, { data, loading, error }] = useMutation(LIKE_LYRIC);

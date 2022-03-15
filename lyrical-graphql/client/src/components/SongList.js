@@ -1,15 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import fetchSongs from "../queries/fetchSongs";
-
-const DELETE_SONG = gql`
-  mutation DeleteSong($id: ID!) {
-    deleteSong(id: $id) {
-      id
-    }
-  }
-`;
+import { DELETE_SONG } from "../queries/deleteSong";
 
 function SongList(props) {
   const { loading, error, data, refetch } = useQuery(fetchSongs);
