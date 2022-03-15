@@ -8,6 +8,8 @@ changes I made:
 2. some API changes in graphql
 3. mongodb in local container
 4. functional components
+5. `@apollo/client` -> useMutation & useQuery
+6. `react-router` 6
 
 ## mongodb
 
