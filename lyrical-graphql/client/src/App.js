@@ -6,7 +6,7 @@ import SongDetail from "./components/SongDetail";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<SongList />} />
+      <Route path="/" element={<SongList data={[]} />} />
       <Route path="songs/new" element={<SongCreate />} />
       <Route path="songs/:id" element={<SongDetail />} />
     </Routes>
