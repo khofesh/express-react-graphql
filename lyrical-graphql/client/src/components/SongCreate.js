@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_SONG } from "../queries/addSong";
 
 function SongCreate() {
   let navigate = useNavigate();
-  const [addSong, { loading, error }] = useMutation(ADD_SONG);
+  const [addSong, { loading, error, data }] = useMutation(ADD_SONG);
   const [title, titleSet] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
 
     await addSong({ variables: { title } });
-    navigate("/");
+    navigate("/", {
+      state: "from /song/new",
+    });
   }
 
   if (loading) return "Submitting...";
