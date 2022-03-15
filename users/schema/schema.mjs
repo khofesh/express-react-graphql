@@ -4,12 +4,7 @@ import {
   GraphQLInt,
   GraphQLSchema,
 } from "graphql";
-import _ from "lodash";
-
-const users = [
-  { id: "23", firstName: "Bill", age: 20 },
-  { id: "47", firstName: "Samantha", age: 21 },
-];
+import axios from "axios";
 
 const UserTypes = new GraphQLObjectType({
   name: "User",
@@ -30,8 +25,9 @@ const RootQuery = new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve(parentValue, args) {
-        return _.find(users, { id: args.id });
+      async resolve(parentValue, args) {
+        const resp = await axios.get(`http://localhost:3000/users/${args.id}`);
+        return resp.data;
       },
     },
   },
