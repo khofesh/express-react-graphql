@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import fetchSongs from "../queries/fetchSongs";
 
 function SongList(props) {
-  const { loading, error, data } = useQuery(fetchSongs);
+  const { loading, error, data, refetch } = useQuery(fetchSongs);
   console.log(data);
 
   console.error(error);
@@ -22,6 +23,8 @@ function SongList(props) {
       );
     });
   }
+
+  useEffect(() => {}, []);
 
   if (error) {
     return <div>Error occurred</div>;
