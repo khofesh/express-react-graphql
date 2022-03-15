@@ -6,9 +6,9 @@ import SongDetail from "./components/SongDetail";
 function App() {
   return (
     <Routes>
-      <Route path="/" component={SongList} />
-      <Route path="songs/new" component={SongCreate} />
-      <Route path="songs/:id" component={SongDetail} />
+      <Route path="/" element={<SongList />} />
+      <Route path="songs/new" element={<SongCreate />} />
+      <Route path="songs/:id" element={<SongDetail />} />
     </Routes>
   );
 }

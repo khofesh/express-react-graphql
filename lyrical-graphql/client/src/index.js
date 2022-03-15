@@ -7,17 +7,11 @@ import "./style/style.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const client = new ApolloClient({
-  dataIdFromObject: (o) => o.id,
-});
-
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
