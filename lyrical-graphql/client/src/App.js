@@ -1,24 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import { Router, Route, hashHistory } from "react-router";
+import SongList from "./components/SongList";
+import SongCreate from "./components/SongCreate";
+import SongDetail from "./components/SongDetail";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={hashHistory}>
+      <Route path="/" component={SongList} />
+      <Route path="songs/new" component={SongCreate} />
+      <Route path="songs/:id" component={SongDetail} />
+    </Router>
   );
 }
 
