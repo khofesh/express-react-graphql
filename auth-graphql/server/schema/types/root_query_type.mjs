@@ -14,4 +14,4 @@ const RootQueryType = new GraphQLObjectType({
   },
 });
 
-module.exports = RootQueryType;
+export default RootQueryType;

@@ -6,6 +6,7 @@ import session from "express-session";
 import passport from "passport";
 import "./services/auth.mjs";
 import MongoStore from "connect-mongo";
+import cors from "cors";
 
 import schema from "./schema/schema.mjs";
 
