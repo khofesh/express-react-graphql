@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import { Link } from 'react-router';
-import query from '../queries/CurrentUser';
-import mutation from '../mutations/Logout';
+import { useMutation, useQuery } from "@apollo/client";
+import { Link } from "react-router";
+import query from "../queries/CurrentUser";
+import mutation from "../mutations/Logout";
 
-class Header extends Component {
-  onLogoutClick() {
-    this.props.mutate({
-      refetchQueries: [{ query }]
-    });
+function Header() {
+  const { data, refetch } = useQuery(query);
+  const [logout, { loading, error }] = useMutation(mutation);
+
+  async function onLogoutClick() {
+    await logout();
+
+    await refetch();
   }
 
-  renderButtons() {
-    const { loading, user } = this.props.data;
+  function renderButtons() {
+    if (loading) {
+      return <div />;
+    }
 
-    if (loading) { return <div />; }
-
-    if (user) {
+    if (data.user) {
       return (
-        <li><a onClick={this.onLogoutClick.bind(this)}>Logout</a></li>
+        <li>
+          <a onClick={onLogoutClick}>Logout</a>
+        </li>
       );
     } else {
       return (
@@ -34,22 +38,16 @@ class Header extends Component {
     }
   }
 
-  render() {
-    return (
-      <nav>
-        <div className="nav-wrapper">
-          <Link to="/" className="brand-logo left">
-            Home
-          </Link>
-          <ul className="right">
-            {this.renderButtons()}
-          </ul>
-        </div>
-      </nav>
-    );
-  }
+  return (
+    <nav>
+      <div className="nav-wrapper">
+        <Link to="/" className="brand-logo left">
+          Home
+        </Link>
+        <ul className="right">{renderButtons()}</ul>
+      </div>
+    </nav>
+  );
 }
 
-export default graphql(mutation)(
-  graphql(query)(Header)
-);
+export default Header;
